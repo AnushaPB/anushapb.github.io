@@ -8,7 +8,11 @@ Open-source materials for labs and workshops that I have developed or co-develop
 
 ## Evodoodle lab
 
-Evodoodle is a Python package that allows players to draw their own landscapes and simulate evolution across them in order to gain intuition for how evolution plays out across space. The Evodoodle lab applies this game to addressing conservation challenges using a hypothesis-driven framework for landscape genomic simulations. The lab materials can be found [here](https://github.com/AnushaPB/evodoodle/blob/main/examples/evodoodle_lab.ipynb).
+[Evodoodle](https://github.com/AnushaPB/evodoodle) is a Python package that allows players to draw their own landscapes and simulate evolution across them in order to gain intuition for how evolution plays out across space. The Evodoodle lab applies this game to addressing conservation challenges using a hypothesis-driven framework for landscape genomic simulations. The lab materials can be found [here](https://github.com/AnushaPB/evodoodle/blob/main/examples/evodoodle_lab.ipynb).
+
+## Landscape genetics labs
+
+These labs were developed for ESPM 154: Landscape Genetics, a course at UC Berkeley instructed by Ian Wang. The labs cover population structure, Isolation-by-Distance (IBD) and Isolation-by-Environment (IBE), Genotype-Environment Assocation (GEA) analysis, and landscape genetic simulations using [Geonomics](https://github.com/erthward/geonomics) and [Evodoodle](https://github.com/AnushaPB/evodoodle). Lab materials can be found [here](https://github.com/AnushaPB/landscape-genetics-labs/tree/main).
 
 ## Algatr workshop
 
