@@ -3,6 +3,8 @@ title: "Publications"
 permalink: /publications/
 author_profile: true
 ---
+For an up-to-date list of publications see [here](https://scholar.google.com/citations?user=VSfYHyQAAAAJ&hl=en&oi=ao)
+
 1. Eric J. Gangloff, **Anusha P. Bishop**, Alyssa Head, Gregory B. Pauly, Constant
 Perry, Princeton L. Vaughn, Kristin M. Winchell, Kinsey M. Brock. (2025). *Integrative and Comparative Biology*. Sex-specific morphological shifts across space and time in replicate urban wall lizard introductions. [https://doi.org/10.1093/icb/icaf060](https://doi.org/10.1093/icb/icaf060) 
 
