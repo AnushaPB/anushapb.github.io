@@ -10,7 +10,7 @@ redirect_from:
 
 I am a PhD student at UC Berkeley conducting research on how evolution plays out across landscapes with the goal of understanding species vulnerability to environmental change. My work involves building and applying tools for studying genetic diversity, connectivity, and adaptation. 
 
-I am part of the [Wang Lab](https://ourenvironment.berkeley.edu/wang-lab) in the [Department of Environmental Science, Policy, and Management](https://ourenvironment.berkeley.edu/), an affiliate of the [Museum of Vertebrate Zoology](https://mvz.berkeley.edu/), and part of the Landscape Genomics Team for the [California Conservation Genomics Project](https://www.ccgproject.org/).
+I am part of the [Wang Lab](https://ourenvironment.berkeley.edu/wang-lab) in the [Department of Environmental Science, Policy, and Management](https://ourenvironment.berkeley.edu/), an affiliate of the [Museum of Vertebrate Zoology](https://mvz.berkeley.edu/), and on the Landscape Genomics Team for the [California Conservation Genomics Project](https://www.ccgproject.org/).
 
 <p align="center">
   <img src="/images/lablogo.png" width="15%" />
