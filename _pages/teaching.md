@@ -6,7 +6,7 @@ author_profile: true
 
 ## Evodoodle lab
 
-Evodoodle is a Python package that allows players to draw their own landscapes and simulate evolution across them in order to gain intuition for how evolution plays out across space. The Evodoodle lab applies this game to addressing conservation challenges using a hypothesis-driven framework for landscape genomic simulations. The lab materials can be found on [here](https://github.com/AnushaPB/evodoodle/blob/main/examples/evodoodle_lab.ipynb).
+Evodoodle is a Python package that allows players to draw their own landscapes and simulate evolution across them in order to gain intuition for how evolution plays out across space. The Evodoodle lab applies this game to addressing conservation challenges using a hypothesis-driven framework for landscape genomic simulations. The lab materials can be found [here](https://github.com/AnushaPB/evodoodle/blob/main/examples/evodoodle_lab.ipynb).
 
 ## Algatr workshop
 
