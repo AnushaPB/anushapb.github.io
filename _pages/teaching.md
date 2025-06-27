@@ -14,4 +14,4 @@ Algatr (A Landscape Genomic Analysis Toolkit in R) is a step-by-step, start-to-f
 
 ## Coding with AI workshop
 
-This workshop provides an introduction to coding with GitHub Copilot, an AI-powered coding assistant that can help with writing code faster and more efficiently. This workshop covers how to install and set-up Visual Studio Code, a free code editor through which we will use GitHub Copilot. Then, it goes through the different features of GitHub Copilot and how to use them to help us code in R. These materials were developed for the UC Berkeley D-Lab and can be found [here](https://github.com/dlab-berkeley/R-Copilot-Assisted-Coding-Workshop).
+This workshop provides an introduction to coding with GitHub Copilot, an AI-powered coding assistant that can help with writing code faster and more efficiently. First, we cover how to install and set-up Visual Studio Code, a free and open-source code editor. Then, it goes through the different features of GitHub Copilot and how to use them to help us code in R. These materials were developed for the UC Berkeley D-Lab and can be found [here](https://github.com/dlab-berkeley/R-Copilot-Assisted-Coding-Workshop).
