@@ -29,6 +29,6 @@ This is a collection of open-source vignettes (mini-tutorials) that I’ve creat
 - [**Spatial Regression in R**](/vignettes/spatial_regression/)   
   A walkthrough implementing different spatial regression models in R to model genetic diversity.
 
-- [**Functional programming in R**](vignettes/functional_R/)  
+- [**Functional programming in R**](/vignettes/functional_R/)  
   An introduction to using functional programming techniques (e.g., `purrr`, `map` functions) to write cleaner, more efficient R code.
 
