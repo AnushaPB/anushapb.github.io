@@ -37,11 +37,14 @@ title: \"{gsub('_', ' ', vignette_name)}\"
 permalink: /vignettes/{vignette_name}/
 ---
 
+{{'{'}}% raw %{{'}'}}
 {{'{'}}% include_relative vignette-content.html %{{'}'}}
+{{'{'}}% endraw %{{'}'}}
 "
     ),
 file = index_md
   )
+  
   message("Created wrapper: ", index_md)
 }
 
