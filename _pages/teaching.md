@@ -21,3 +21,14 @@ Algatr (A Landscape Genomic Analysis Toolkit in R) is a step-by-step, start-to-f
 ## Coding with AI workshop
 
 This workshop provides an introduction to coding with GitHub Copilot, an AI-powered coding assistant that can help with writing code faster and more efficiently. First, we cover how to install and set-up Visual Studio Code, a free and open-source code editor. Then, it goes through the different features of GitHub Copilot and how to use them to help us code in R. These materials were developed for the UC Berkeley D-Lab and can be found [here](https://github.com/dlab-berkeley/R-Copilot-Assisted-Coding-Workshop).
+
+## Mini-tutorials
+
+This is a collection of open-source vignettes (mini-tutorials) that I’ve created on various topics. They are designed as practical, step-by-step guides, but are more informal and less broadly applicable than my full workshop materials.
+
+- [**Spatial Regression in R**](/vignettes/spatial_regression/)   
+  A walkthrough of implementing different spatial regression models in R to model genetic diversity.
+
+- [**Functional programming in R**](vignettes/functional_R/)  
+  An introduction to using functional programming techniques (e.g., `purrr`, `map` functions) to write cleaner, more efficient R code.
+
