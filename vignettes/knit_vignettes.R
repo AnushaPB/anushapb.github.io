@@ -16,7 +16,15 @@ for (rmd in vignettes) {
   message("Rendering: ", rmd)
   render(
     input = rmd,
-    output_file = file.path(out_dir, "index.html")
+    output_format = html_document(
+      toc = TRUE,
+      toc_depth = 2,
+      toc_float = TRUE,
+      theme = "cosmo",
+      self_contained = TRUE
+    ),
+    output_file = file.path(out_dir, "index.html"),
+    quiet = TRUE
   )
 }
 
