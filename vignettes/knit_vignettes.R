@@ -1,9 +1,6 @@
-# Script to knit RMarkdown files and create Jekyll-ready pages
 library(rmarkdown)
 library(here)
-library(glue)
 
-# Find all .Rmd files in vignettes subdirectories
 vignettes <- list.files(
   here("vignettes"),
   pattern = "\\.Rmd$",
@@ -16,7 +13,7 @@ for (rmd in vignettes) {
   vignette_name <- basename(out_dir) # folder name = vignette name
   message("Rendering: ", rmd)
   
-  # Knit to HTML fragment (no <html>, <head>, etc.)
+  # Knit to HTML fragment
   render(
     input = rmd,
     output_format = html_fragment(
@@ -29,22 +26,17 @@ for (rmd in vignettes) {
   
   # Create Jekyll index.md wrapper
   index_md <- file.path(out_dir, "index.md")
-  cat(
-    glue(
-      "---
-layout: page
-title: \"{gsub('_', ' ', vignette_name)}\"
-permalink: /vignettes/{vignette_name}/
----
-
-{{'{'}}% raw %{{'}'}}
-{{'{'}}% include_relative vignette-content.html %{{'}'}}
-{{'{'}}% endraw %{{'}'}}
-"
-    ),
-file = index_md
+  wrapper_content <- paste(
+    "---",
+    "layout: page",
+    sprintf("title: \"%s\"", gsub('_', ' ', vignette_name)),
+    sprintf("permalink: /vignettes/%s/", vignette_name),
+    "---",
+    "",
+    "{% include_relative vignette-content.html %}",
+    sep = "\n"
   )
-  
+  writeLines(wrapper_content, index_md)
   message("Created wrapper: ", index_md)
 }
 
