@@ -1,10 +1,11 @@
-Spatial regression vignette
+Spatial regression
 ================
 Anusha Bishop
 
 - [1. Run wingen](#1-run-wingen)
 - [2. Fit spatial regression models](#2-fit-spatial-regression-models)
-  - [2.1 Option 1: Variogram and GLS](#21-option-1-variogram-and-gls)
+  - [2.1 Option 1: Variogram and GLS
+    models](#21-option-1-variogram-and-gls-models)
   - [2.2 Option 2: Spatial error and lag
     models](#22-option-2-spatial-error-and-lag-models)
 - [3. Plot results](#3-plot-results)
@@ -52,11 +53,11 @@ at William & Mary ([Robert,
 
 # 1. Run wingen
 
-We will start by running the wingen functions to create a genetic
-diversity raster. Our predictor layer (`lotr_lyr`) is the layer that
-controlled carrying capacity and connectivity in the simulation. In this
-case, we know that this layer is the primary driver of genetic
-diversity.
+We will start by running the wingen functions to create a moving window
+map of genetic diversity. Our predictor of genetic diversity is the
+raster layer (`lotr_lyr`) that controlled carrying capacity and
+connectivity in the simulation. In this case, we know that this layer is
+the primary driver of genetic diversity.
 
 ``` r
 # Create layer for wingen 
@@ -64,7 +65,7 @@ lotr_lyr <- rast(lotr_lyr)
 names(lotr_lyr) <- "predictor"
 lyr <- aggregate(lotr_lyr, 3)
 
-# Run moving window
+# Run moving window to estimate genetic diversity based on heterozygosity
 wgd <- window_gd(lotr_vcf, lotr_coords, lyr, stat = "Ho", wdim = 5)
 ```
 
@@ -118,7 +119,7 @@ f <- formula("Ho ~ predictor")
 
 # 2. Fit spatial regression models
 
-## 2.1 Option 1: Variogram and GLS
+## 2.1 Option 1: Variogram and GLS models
 
 Our first option for fitting a spatial model is to use a Generalized
 Least Squares (GLS) approach with spatially correlated errors. We start

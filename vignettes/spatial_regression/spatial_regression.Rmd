@@ -1,5 +1,5 @@
 ---
-title: "Spatial regression vignette"
+title: "Spatial regression"
 author: "Anusha Bishop"
 output: 
   github_document:
@@ -39,7 +39,7 @@ This tutorial will walk through how to fit spatial regression models to genetic 
 
 # 1. Run wingen 
 
-We will start by running the wingen functions to create a genetic diversity raster. Our predictor layer (`lotr_lyr`) is the layer that controlled carrying capacity and connectivity in the simulation. In this case, we know that this layer is the primary driver of genetic diversity. 
+We will start by running the wingen functions to create a moving window map of genetic diversity. Our predictor of genetic diversity is the raster layer (`lotr_lyr`) that controlled carrying capacity and connectivity in the simulation. In this case, we know that this layer is the primary driver of genetic diversity. 
 
 ```{r}
 # Create layer for wingen 
@@ -47,7 +47,7 @@ lotr_lyr <- rast(lotr_lyr)
 names(lotr_lyr) <- "predictor"
 lyr <- aggregate(lotr_lyr, 3)
 
-# Run moving window
+# Run moving window to estimate genetic diversity based on heterozygosity
 wgd <- window_gd(lotr_vcf, lotr_coords, lyr, stat = "Ho", wdim = 5)
 
 # Krige results (here I am kriging to the same resolution as the input)
@@ -69,7 +69,7 @@ f <- formula("Ho ~ predictor")
 
 # 2. Fit spatial regression models
 
-## 2.1 Option 1: Variogram and GLS
+## 2.1 Option 1: Variogram and GLS models
 
 Our first option for fitting a spatial model is to use a Generalized Least Squares (GLS) approach with spatially correlated errors. We start by fitting an ordinary least squares (OLS) model and checking the residuals for spatial autocorrelation. We then fit a variogram to these residuals, which quantifies how residual similarity decreases with distance. We then fit different variogram models (exponential, spherical, Gaussian) to estimate the spatial covariance structure and incorporate this structure into a GLS model.
 
