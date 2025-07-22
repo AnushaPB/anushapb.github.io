@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Anusha Bishop" />
+
+
+<title>Functional programming in R</title>
+
+<script src="vignette-content_files/header-attrs-2.29/header-attrs.js"></script>
+<script src="vignette-content_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="vignette-content_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="vignette-content_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="vignette-content_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="vignette-content_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="vignette-content_files/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="vignette-content_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="vignette-content_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="vignette-content_files/navigation-1.1/tabsets.js"></script>
+<link href="vignette-content_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="vignette-content_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Functional programming in R</h1>
+<h4 class="author">Anusha Bishop</h4>
+
+</div>
+
+
+<p>This tutorial will cover the basics of functional programming in R
+using the purrr package. In functional-style programming, we can break
+big problems into smaller pieces, and then solve each piece with a
+function. This is a powerful way to write code because it is more
+modular, easier to read, and less error-prone. This material is based
+off of Hadley Wicham’s Advanced R book, which is a great resource for
+learning more about functional programming in R (<a
+href="https://adv-r.hadley.nz/"
+class="uri">https://adv-r.hadley.nz/</a>).</p>
+<p>Let’s start by installing and loading the libraries we will need for
+this tutorial:</p>
+<pre class="r"><code>install_and_load &lt;- function(package) {
+  if (!require(package, character.only = TRUE)) {
+    install.packages(package, dependencies = TRUE)
+  }
+  library(package, character.only = TRUE)
+  return()
+}
+
+packages &lt;- c(&quot;purrr&quot;, &quot;CoordinateCleaner&quot;, &quot;dplyr&quot;, &quot;tidyr&quot;, &quot;rgbif&quot;, &quot;ggplot2&quot;)
+lapply(packages, install_and_load) # Will return NULL if successful</code></pre>
+<div id="functionals" class="section level1">
+<h1>1. Functionals</h1>
+<p>The first concept we will cover is functionals. Functionals are
+functions that take a function as an input and return a vector (or list)
+as output.</p>
+<p>Examples: <code>lapply()</code>, <code>apply()</code>,
+<code>tapply()</code>, or <code>purrr::map()</code></p>
+<p>Functionals are commonly used as an alternative to for loops. For
+loops aren’t bad, but they are often “too flexible” (unclear what you
+are producing, potential side effects, not input/output oriented,
+etc.)</p>
+<p>We will be using the purrr package to work with functionals. Purrr
+provides a consistent and user friendly set of tools for working with
+functions. The most basic purrr function is <code>map()</code>. This
+function takes a vector or list as input and applies a function to each
+element. The output is a list where each element is the result of
+applying the function to the corresponding element of the input.</p>
+<pre class="r"><code># here is a simple example of using map to print each element of a vector
+map(c(&quot;hi&quot;, &quot;hello&quot;, &quot;yoohoo&quot;), function(greeting) print(greeting))</code></pre>
+<pre><code>## [1] &quot;hi&quot;
+## [1] &quot;hello&quot;
+## [1] &quot;yoohoo&quot;</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;hi&quot;
+## 
+## [[2]]
+## [1] &quot;hello&quot;
+## 
+## [[3]]
+## [1] &quot;yoohoo&quot;</code></pre>
+<pre class="r"><code># you can also use the shorthand ~ to define a function
+map(c(&quot;hi&quot;, &quot;hello&quot;, &quot;yoohoo&quot;), ~print(.x))</code></pre>
+<pre><code>## [1] &quot;hi&quot;
+## [1] &quot;hello&quot;
+## [1] &quot;yoohoo&quot;</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;hi&quot;
+## 
+## [[2]]
+## [1] &quot;hello&quot;
+## 
+## [[3]]
+## [1] &quot;yoohoo&quot;</code></pre>
+<pre class="r"><code># or you can use an existing function, if there is only one argument
+map(c(&quot;hi&quot;, &quot;hello&quot;, &quot;yoohoo&quot;), print)</code></pre>
+<pre><code>## [1] &quot;hi&quot;
+## [1] &quot;hello&quot;
+## [1] &quot;yoohoo&quot;</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;hi&quot;
+## 
+## [[2]]
+## [1] &quot;hello&quot;
+## 
+## [[3]]
+## [1] &quot;yoohoo&quot;</code></pre>
+<p>How is this different from a non-functional? Let’s say you wanted to
+simulate rolling a standard die (d6), a d10, and a magic 8 ball 10
+times. You could use a for loop to do this:</p>
+<pre class="r"><code>die &lt;- c(d6 = 6, d10 = 10, magic8ball = 20)
+
+roll_results &lt;- list()
+
+for (i in 1:length(die)) {
+  roll_results[[i]] &lt;- sample(1:die[i], 10, replace = TRUE)
+}
+
+names(roll_results) &lt;- names(die)
+
+roll_results</code></pre>
+<pre><code>## $d6
+##  [1] 1 4 5 2 4 3 6 3 3 2
+## 
+## $d10
+##  [1] 2 8 3 6 7 4 5 5 2 3
+## 
+## $magic8ball
+##  [1]  7 19 11 11  2  3 17 10 19 17</code></pre>
+<p>Or you could define a function to roll a die given some number of
+sides and then use map to run that function 10 times:</p>
+<pre class="r"><code>die &lt;- c(d6 = 6, d10 = 10, magic8ball = 20)
+
+roll &lt;- function(sides) sample(1:sides, 10, replace = TRUE)
+
+roll_results &lt;- map(die, roll)
+
+roll_results</code></pre>
+<pre><code>## $d6
+##  [1] 6 2 4 6 3 5 2 3 3 4
+## 
+## $d10
+##  [1]  6  2  7  9 10  8  3  4  6  9
+## 
+## $magic8ball
+##  [1] 17  7  5  6 18 19  5 15 18 13</code></pre>
+<p>Some benefits of this approach are: 1. It is easier to read and
+understand. You define a function whose name tells you what it is doing
+(<code>roll()</code>) and then apply that function to your list of die.
+2. If there happened to be a bug in the <code>roll()</code> function, we
+could fix it in one place and it would be fixed for all the rolls. 3.
+You can easily modify the function by adding additional arguments, such
+as the number of times to roll the die. 4. We won’t have any side
+effects from the for loop, such as accidentally overwriting a variable.
+5. The output preserves the names of the input vector, so we easily know
+which die each set of rolls corresponds to without having to assign
+names to the output (which can be risky in other contexts).</p>
+<p>If you don’t like the tidyverse, you can also use
+<code>sapply()</code> or <code>lapply()</code> to do the same thing:</p>
+<pre class="r"><code>sapply(1:10, function(x) roll(sides = 6))</code></pre>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    2    4    6    1    3    1    5    5    4     3
+##  [2,]    5    4    2    3    5    4    3    4    5     3
+##  [3,]    5    1    2    6    2    4    2    6    6     3
+##  [4,]    5    1    6    1    4    6    5    6    5     3
+##  [5,]    6    4    4    1    2    6    5    6    6     6
+##  [6,]    3    4    2    1    3    1    5    6    6     6
+##  [7,]    5    3    2    6    1    2    4    5    2     2
+##  [8,]    1    1    2    5    5    5    5    3    3     1
+##  [9,]    4    4    3    5    1    2    2    6    6     6
+## [10,]    2    2    2    3    1    3    1    6    3     4</code></pre>
+<p><strong>Example 1: Using <code>map()</code> to pull occurrence data
+for a list of species</strong></p>
+<p>Now let’s try applying <code>map()</code> to a more realistic
+research problem. Imagine we have a list of species and we want to pull
+occurrence data for each species from the GBIF database. We can use a
+functional approach with the <code>map()</code> function to iterate over
+each species and pull the data.</p>
+<pre class="r"><code># First, let&#39;s define a list of species we want to pull occurrence data for
+# Let&#39;s say we are working on three different projects and each project is focused on a different species
+species &lt;- 
+  c(
+    Project01 = &quot;Sceloporus occidentalis&quot;, 
+    Project02 = &quot;Phrynosoma blainvillii&quot;, 
+    Project03 = &quot;Plestiodon skiltonianus&quot;
+  )
+
+# Map over the species vector and use occ_search to pull occurrence data for each species
+#  ~ .x is a shorthand for function(x) x
+# .progress = TRUE will show a progress bar (super handy for the impatient, like me)
+occ_records &lt;- map(species, ~occ_search(scientificName = .x, hasCoordinate = TRUE, limit = 1000), .progress = TRUE)</code></pre>
+<pre><code>## ■■■■■■■■■■■ 33% | ETA: 23s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 12s</code></pre>
+<pre class="r"><code># This will provide a list where each element is the occurrence data for a species
+# For example, let&#39;s look at the Project01 element
+# Note that the names of the list correspond to the names of the species vector 
+occ_records[[&quot;Project01&quot;]]</code></pre>
+<pre><code>## Records found [135878] 
+## Records returned [1000] 
+## No. unique hierarchies [1] 
+## No. media records [1000] 
+## No. facets [0] 
+## Args [hasCoordinate=TRUE, occurrenceStatus=PRESENT, limit=1000,
+##      offset=0, scientificName=Sceloporus occidentalis, fields=all] 
+## # A tibble: 1,000 × 95
+##    key        scientificName     decimalLatitude decimalLongitude issues
+##    &lt;chr&gt;      &lt;chr&gt;                        &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; 
+##  1 5006703295 Sceloporus occide…            32.6            -117. cdc,c…
+##  2 5006770293 Sceloporus occide…            34.1            -118. cdc,c…
+##  3 5006775023 Sceloporus occide…            34.1            -118. cdc,c…
+##  4 5006830074 Sceloporus occide…            38.7            -122. cdc,c…
+##  5 5006926024 Sceloporus occide…            34.1            -118. cdc,c…
+##  6 5006950619 Sceloporus occide…            34.3            -119. cdc,c…
+##  7 5007283698 Sceloporus occide…            35.3            -121. cdc,c…
+##  8 5007296532 Sceloporus occide…            34.1            -118. cdc,c…
+##  9 5007298566 Sceloporus occide…            32.7            -117. cdc,c…
+## 10 5007433971 Sceloporus occide…            34.0            -118. cdc,c…
+## # ℹ 990 more rows
+## # ℹ 90 more variables: datasetKey &lt;chr&gt;, publishingOrgKey &lt;chr&gt;,
+## #   installationKey &lt;chr&gt;, hostingOrganizationKey &lt;chr&gt;,
+## #   publishingCountry &lt;chr&gt;, protocol &lt;chr&gt;, lastCrawled &lt;chr&gt;,
+## #   lastParsed &lt;chr&gt;, crawlId &lt;int&gt;, projectId &lt;chr&gt;,
+## #   basisOfRecord &lt;chr&gt;, occurrenceStatus &lt;chr&gt;, taxonKey &lt;int&gt;,
+## #   kingdomKey &lt;int&gt;, phylumKey &lt;int&gt;, classKey &lt;int&gt;, …</code></pre>
+<pre class="r"><code># This element is an rgbif object
+class(occ_records[[&quot;Project01&quot;]])</code></pre>
+<pre><code>## [1] &quot;gbif&quot;</code></pre>
+<pre class="r"><code># And therefore has several different elements itself
+names(occ_records[[&quot;Project01&quot;]])</code></pre>
+<pre><code>## [1] &quot;meta&quot;      &quot;hierarchy&quot; &quot;data&quot;      &quot;media&quot;     &quot;facets&quot;</code></pre>
+<pre class="r"><code># What we care about is the &quot;data&quot; element, and we can use map to pull just that element out
+occ_data &lt;- map(occ_records, &quot;data&quot;)
+
+# We can also bind the rows of our list together to make a dataframe
+# The .id argument will add a column with the name of the list element, in this case our original project ID (this is super handy for keeping track of where things come from in a list)
+occ_df &lt;- bind_rows(occ_data, .id = &quot;project&quot;)
+head(occ_df)</code></pre>
+<pre><code>## # A tibble: 6 × 96
+##   project   key   scientificName decimalLatitude decimalLongitude issues
+##   &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt; 
+## 1 Project01 5006… Sceloporus oc…            32.6            -117. cdc,c…
+## 2 Project01 5006… Sceloporus oc…            34.1            -118. cdc,c…
+## 3 Project01 5006… Sceloporus oc…            34.1            -118. cdc,c…
+## 4 Project01 5006… Sceloporus oc…            38.7            -122. cdc,c…
+## 5 Project01 5006… Sceloporus oc…            34.1            -118. cdc,c…
+## 6 Project01 5006… Sceloporus oc…            34.3            -119. cdc,c…
+## # ℹ 90 more variables: datasetKey &lt;chr&gt;, publishingOrgKey &lt;chr&gt;,
+## #   installationKey &lt;chr&gt;, hostingOrganizationKey &lt;chr&gt;,
+## #   publishingCountry &lt;chr&gt;, protocol &lt;chr&gt;, lastCrawled &lt;chr&gt;,
+## #   lastParsed &lt;chr&gt;, crawlId &lt;int&gt;, projectId &lt;chr&gt;,
+## #   basisOfRecord &lt;chr&gt;, occurrenceStatus &lt;chr&gt;, taxonKey &lt;int&gt;,
+## #   kingdomKey &lt;int&gt;, phylumKey &lt;int&gt;, classKey &lt;int&gt;, familyKey &lt;int&gt;,
+## #   genusKey &lt;int&gt;, speciesKey &lt;int&gt;, acceptedTaxonKey &lt;int&gt;, …</code></pre>
+<p><strong>Example 2: the wonders of <code>pmap()</code></strong></p>
+<p>Now let’s say you want to download occurrence records for specimens
+from the MVZ, LACM, and CAS museums. You could do a nested for-loop to
+iterate over each species and each museum…or you could use
+<code>pmap()</code>, a function which will allow us to iterate over all
+of our combinations at once.</p>
+<pre class="r"><code>museums &lt;- c(&quot;MVZ&quot;, &quot;LACM&quot;, &quot;CAS&quot;)
+
+# To make our code a little easier to read and put the &quot;function&quot; in functional, let&#39;s first make a function that will pull occurrence data for a species from a museum
+occ_search_museum &lt;- function(species, museum) {
+  occ_search(
+    scientificName = species, 
+    hasCoordinate = TRUE, 
+    limit = 1000,
+    basisOfRecord = &quot;PRESERVED_SPECIMEN&quot;,
+    institutionCode = museum
+  )$data
+} 
+
+# Now, lets create grid of all the combinations of species and museums
+# This will be a dataframe with two columns, one for species and one for museum with all possible combinations of the two 
+species_museum &lt;- expand_grid(speciesID = species, museumID = museums)
+print(species_museum)</code></pre>
+<pre><code>## # A tibble: 9 × 2
+##   speciesID               museumID
+##   &lt;chr&gt;                   &lt;chr&gt;   
+## 1 Sceloporus occidentalis MVZ     
+## 2 Sceloporus occidentalis LACM    
+## 3 Sceloporus occidentalis CAS     
+## 4 Phrynosoma blainvillii  MVZ     
+## 5 Phrynosoma blainvillii  LACM    
+## 6 Phrynosoma blainvillii  CAS     
+## 7 Plestiodon skiltonianus MVZ     
+## 8 Plestiodon skiltonianus LACM    
+## 9 Plestiodon skiltonianus CAS</code></pre>
+<pre class="r"><code># Instead of map() we will now use pmap(), which will take each row of species_museum to fill in the arguments of occ_search_museum()
+# Notice that we use \(x, y) to define the arguments of the function, this is the same thing as ~function(x, y), but in a more concise format
+museum_records &lt;- 
+  pmap(species_museum, \(speciesID, museumID) occ_search_museum(species = speciesID, museum = museumID), .progress = TRUE) %&gt;%
+  bind_rows()</code></pre>
+<pre><code>## ■■■■ 11% | ETA: 2m ■■■■■■■■ 22% | ETA: 2m ■■■■■■■■■■■ 33% | ETA: 1m
+## ■■■■■■■■■■■■■■ 44% | ETA: 1m ■■■■■■■■■■■■■■■■■■ 56% | ETA: 33s
+## ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 23s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% |
+## ETA: 17s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 8s</code></pre>
+<pre class="r"><code># We could have also used pmap(species_museum, occ_search_museum) since our arguments are in order, but this way is a little more explicit and less prone to bugs</code></pre>
+</div>
+<div id="functional-factories" class="section level1">
+<h1>2. Functional factories</h1>
+<p>Another key concept in functional programming is functional
+factories. Functional factories are functions that return other
+functions. This can be useful if you have a lot of different functions
+that all need to use the same arguments.</p>
+<p><strong>Example 3: creating a museum factory</strong></p>
+<p>Below we use a factory function to create functions that will pull
+occurrence data from a specific museum.</p>
+<pre class="r"><code>museum_factory &lt;- function(museum){
+  occ_search_museum &lt;- function(species) {
+    result &lt;- occ_search(
+      scientificName = species, 
+      hasCoordinate = TRUE, 
+      limit = 1000,
+      basisOfRecord = &quot;PRESERVED_SPECIMEN&quot;,
+      institutionCode = museum
+    )$data
+  }
+}
+
+# We can use our factory to create functions that will pull occurrence data for a species from a specific museum
+search_mvz &lt;- museum_factory(&quot;MVZ&quot;)
+search_lacm &lt;- museum_factory(&quot;LACM&quot;)
+search_cas &lt;- museum_factory(&quot;CAS&quot;)
+
+# We can use our new functions to pull occurrence data from a specific museum
+search_mvz(&quot;Crotalus cerastes&quot;)</code></pre>
+</div>
+<div id="function-operators" class="section level1">
+<h1>3. Function operators</h1>
+<p>Our final functional programming technique is the use of function
+operators. Function operators are functions that take other functions as
+input and return a new function as output. In other words, they are just
+function factories that take a function as input. Function operators can
+be particularly useful for error handling, as you will see in the next
+example.</p>
+<p><strong>Example 4: catching errors with safely() and
+possibly()</strong></p>
+<p>Have you ever been runnning a super long loop and then it fails 90%
+of the way through? Argh! Wouldn’t it be better if it stored the results
+of everything that worked and then told you what went wrong? Well, that
+is what <code>safely()</code> does! <code>safely()</code> will take in
+your function and return a new function that will return a list with the
+result of the function if it works or an error message if the function
+fails.</p>
+<pre class="r"><code># Let&#39;s imagine we have an invalid species name in our list
+species &lt;- 
+  c(
+    Project01 = &quot;Phrynosoma blainvillii&quot;, 
+    Project02 = &quot;Plestiodon skiltonianus&quot;,
+    Project03 = &quot;Bogus bogus&quot;
+  )
+
+# We won&#39;t initially get an error from our search function because the function will just return a NULL
+mvz_specimens &lt;- map(species, search_mvz, .progress = TRUE)</code></pre>
+<pre><code>## ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 7s</code></pre>
+<pre class="r"><code># But if we try do stuff with the list, such as pull coordinates out, we will get an error
+pull_coords &lt;- function(data){
+  data &lt;- dplyr::select(data, species, decimalLatitude, decimalLongitude)
+  return(data)
+}
+# map(mvz_specimens, pull_coords) # this will fail!
+
+# We can use safely() to create a new function that will catch any errors
+safe_function &lt;- safely(pull_coords)
+coords &lt;- map(mvz_specimens, safe_function)
+
+# If we look at the output, we will see that the output is a list with two elements, result and error
+coords[[&quot;Project01&quot;]]</code></pre>
+<pre><code>## $result
+## # A tibble: 1 × 3
+##   species                decimalLatitude decimalLongitude
+##   &lt;chr&gt;                            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Phrynosoma blainvillii            36.7            -122.
+## 
+## $error
+## NULL</code></pre>
+<pre class="r"><code># If the function was successful , the result element will contain the output of the function and the error element will be NULL
+coords[[&quot;Project01&quot;]]$result</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   species                decimalLatitude decimalLongitude
+##   &lt;chr&gt;                            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 Phrynosoma blainvillii            36.7            -122.</code></pre>
+<pre class="r"><code>coords[[&quot;Project01&quot;]]$error</code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="r"><code># If the function failed, the result element will be NULL and the error element will contain the error message
+coords[[&quot;Project03&quot;]]$result</code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="r"><code>coords[[&quot;Project03&quot;]]$error</code></pre>
+<pre><code>## &lt;simpleError in UseMethod(&quot;select&quot;): no applicable method for &#39;select&#39; applied to an object of class &quot;NULL&quot;&gt;</code></pre>
+<pre class="r"><code># You can use map() to pull out the error messages
+map(coords, &quot;error&quot;)</code></pre>
+<pre><code>## $Project01
+## NULL
+## 
+## $Project02
+## NULL
+## 
+## $Project03
+## &lt;simpleError in UseMethod(&quot;select&quot;): no applicable method for &#39;select&#39; applied to an object of class &quot;NULL&quot;&gt;</code></pre>
+<pre class="r"><code># You can also use map to pull out the elements with no errors and compact() to remove any NULL elements
+coords &lt;- map(coords, &quot;result&quot;) %&gt;% compact()</code></pre>
+<p>Another handy function operator is <code>possibly()</code>. This will
+return a list with the result or NULL if the function failed. This can
+be useful if you know that some of your functions will fail, but you
+just want to ignore them and keep going and then drop them later.</p>
+<pre class="r"><code># Possible_function will return NULL if the function fails
+# You can change the otherwise argument to return something else (e.g., NA or &quot;No result&quot;), if you want
+possible_function &lt;- possibly(pull_coords, otherwise = NULL)
+
+# Now we can use possible_function() to pull out the coordinates and ignore any errors
+coords &lt;- map(mvz_specimens, possible_function)
+
+# And then we can use compact() to remove any NULL elements
+coords &lt;- compact(coords)</code></pre>
+</div>
+<div id="try-it-out" class="section level1">
+<h1>Try it out!</h1>
+<p>Now it’s time for you to be functional! The following code uses the
+CoordinateCleaner package to clean up some occurrence data using the
+<code>clean_coordinates()</code>function; this function takes in a
+dataframe of occurrence data and a list of tests to run. The output is a
+dataframe with a column for each test that was run and a flag for each
+record that failed that test. Rewrite the code in a functional
+programming style using the purrr functions we have learned about:</p>
+<pre class="r"><code>library(CoordinateCleaner)
+
+clean_project1 &lt;- clean_coordinates(occ_data[[&quot;Project01&quot;]], tests = c(&quot;institutions&quot;, &quot;seas&quot;, &quot;duplicates&quot;, &quot;outliers&quot;, &quot;urban&quot;))</code></pre>
+<pre><code>## Testing coordinate validity</code></pre>
+<pre><code>## Flagged 0 records.</code></pre>
+<pre><code>## Testing sea coordinates</code></pre>
+<pre><code>## Reading layer `ne_50m_land&#39; from data source 
+##   `C:\Users\Anusha\AppData\Local\Temp\Rtmp8WGPim\ne_50m_land.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 1420 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -89.99893 xmax: 180 ymax: 83.59961
+## Geodetic CRS:  WGS 84</code></pre>
+<pre><code>## Flagged 29 records.</code></pre>
+<pre><code>## Testing urban areas</code></pre>
+<pre><code>## Downloading urban areas via rnaturalearth</code></pre>
+<pre><code>## Reading layer `ne_50m_urban_areas&#39; from data source 
+##   `C:\Users\Anusha\AppData\Local\Temp\Rtmp8WGPim\ne_50m_urban_areas.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 2143 features and 4 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -157.984 ymin: -46.26844 xmax: 174.97 ymax: 69.35127
+## Geodetic CRS:  WGS 84</code></pre>
+<pre><code>## Flagged 590 records.</code></pre>
+<pre><code>## Testing geographic outliers</code></pre>
+<pre><code>## Flagged 6 records.</code></pre>
+<pre><code>## Testing biodiversity institutions</code></pre>
+<pre><code>## Flagged 27 records.</code></pre>
+<pre><code>## Testing duplicates</code></pre>
+<pre><code>## Flagged 24 records.</code></pre>
+<pre><code>## Flagged 631 of 1000 records, EQ = 0.63.</code></pre>
+<pre class="r"><code>clean_project2 &lt;- clean_coordinates(occ_data[[&quot;Project02&quot;]], tests = c(&quot;institutions&quot;, &quot;outliers&quot;, &quot;seas&quot;, &quot;duplicates&quot;, &quot;urban&quot;))</code></pre>
+<pre><code>## Testing coordinate validity</code></pre>
+<pre><code>## Flagged 0 records.</code></pre>
+<pre><code>## Testing sea coordinates</code></pre>
+<pre><code>## Reading layer `ne_50m_land&#39; from data source 
+##   `C:\Users\Anusha\AppData\Local\Temp\Rtmp8WGPim\ne_50m_land.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 1420 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -89.99893 xmax: 180 ymax: 83.59961
+## Geodetic CRS:  WGS 84</code></pre>
+<pre><code>## Flagged 33 records.</code></pre>
+<pre><code>## Testing urban areas</code></pre>
+<pre><code>## Downloading urban areas via rnaturalearth</code></pre>
+<pre><code>## Reading layer `ne_50m_urban_areas&#39; from data source 
+##   `C:\Users\Anusha\AppData\Local\Temp\Rtmp8WGPim\ne_50m_urban_areas.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 2143 features and 4 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -157.984 ymin: -46.26844 xmax: 174.97 ymax: 69.35127
+## Geodetic CRS:  WGS 84</code></pre>
+<pre><code>## Flagged 127 records.</code></pre>
+<pre><code>## Testing geographic outliers</code></pre>
+<pre><code>## Flagged 0 records.</code></pre>
+<pre><code>## Testing biodiversity institutions</code></pre>
+<pre><code>## Flagged 1 records.</code></pre>
+<pre><code>## Testing duplicates</code></pre>
+<pre><code>## Flagged 7 records.</code></pre>
+<pre><code>## Flagged 167 of 1000 records, EQ = 0.17.</code></pre>
+<pre class="r"><code>clean_project3 &lt;- clean_coordinates(occ_data[[&quot;Project03&quot;]], tests = c(&quot;institutions&quot;, &quot;outliers&quot;, &quot;seas&quot;, &quot;duplicates&quot;, &quot;urban&quot;))</code></pre>
+<pre><code>## Testing coordinate validity</code></pre>
+<pre><code>## Flagged 0 records.</code></pre>
+<pre><code>## Testing sea coordinates</code></pre>
+<pre><code>## Reading layer `ne_50m_land&#39; from data source 
+##   `C:\Users\Anusha\AppData\Local\Temp\Rtmp8WGPim\ne_50m_land.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 1420 features and 3 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -180 ymin: -89.99893 xmax: 180 ymax: 83.59961
+## Geodetic CRS:  WGS 84</code></pre>
+<pre><code>## Flagged 44 records.</code></pre>
+<pre><code>## Testing urban areas</code></pre>
+<pre><code>## Downloading urban areas via rnaturalearth</code></pre>
+<pre><code>## Reading layer `ne_50m_urban_areas&#39; from data source 
+##   `C:\Users\Anusha\AppData\Local\Temp\Rtmp8WGPim\ne_50m_urban_areas.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 2143 features and 4 fields
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -157.984 ymin: -46.26844 xmax: 174.97 ymax: 69.35127
+## Geodetic CRS:  WGS 84</code></pre>
+<pre><code>## Flagged 223 records.</code></pre>
+<pre><code>## Testing geographic outliers</code></pre>
+<pre><code>## Flagged 0 records.</code></pre>
+<pre><code>## Testing biodiversity institutions</code></pre>
+<pre><code>## Flagged 1 records.</code></pre>
+<pre><code>## Testing duplicates</code></pre>
+<pre><code>## Flagged 12 records.</code></pre>
+<pre><code>## Flagged 280 of 1000 records, EQ = 0.28.</code></pre>
+<pre class="r"><code>clean_list &lt;- list(Project01 = clean_project1, Project02 = clean_project2, Project03 = clean_project3)</code></pre>
+<p>The tests argument specifies which tests to run. The tests specified
+here are: - <strong>institutions</strong> tests a radius around known
+biodiversity institutions from institutions. The radius is inst_rad. -
+<strong>outliers</strong> tests each species for outlier records.
+Depending on the outliers_mtp and outliers.td arguments either flags
+records that are a minimum distance away from all other records of this
+species (outliers_td) or records that are outside a multiple of the
+interquartile range of minimum distances to the next neighbour of this
+species (outliers_mtp). Three different methods are available for the
+outlier test: “If “outlier” a boxplot method is used and records are
+flagged as outliers if their mean distance to all other records of the
+same species is larger than mltpl * the interquartile range of the mean
+distance of all records of this species. If “mad” the median absolute
+deviation is used. In this case a record is flagged as outlier, if the
+mean distance to all other records of the same species is larger than
+the median of the mean distance of all points plus/minus the mad of the
+mean distances of all records of the species * mltpl. If “distance”
+records are flagged as outliers, if the minimum distance to the next
+record of the species is &gt; tdi. - <strong>seas</strong> tests if
+coordinates fall into the ocean. - <strong>validity</strong> checks if
+coordinates correspond to a lat/lon coordinate reference system. This
+test is always on, since all records need to pass for any other test to
+run. <strong>For a list of all available tests see the function
+documentation with ?clean_coordinates.</strong></p>
+<pre class="r"><code># Write your code here</code></pre>
+<p>Below is code to plot the results of the tests for project 1. The
+.summary column contains the overall result of the tests. The other
+columns contain the results of the individual tests. If the test failed,
+the value in the column will be FALSE and if the test passed, the value
+will be TRUE. If any test failed, the value in the .summary column will
+be FALSE.</p>
+<pre class="r"><code>problems &lt;- 
+  clean_project1 %&gt;%
+  pivot_longer(starts_with(&quot;.&quot;), names_to = &quot;test&quot;, values_to = &quot;result&quot;) %&gt;%
+  mutate(test = factor(test, levels = c(setdiff(unique(test), &quot;.summary&quot;), &quot;.summary&quot;)))
+
+ggplot(problems) +
+  geom_point(aes(x = decimalLongitude, y = decimalLatitude, color = result)) +
+  facet_wrap(~test, nrow = 1) +
+  coord_quickmap()</code></pre>
+<p><img src="vignette-content_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Write a function that will plot the results of the tests for a given
+project. The function should take a cleaned dataframe as input and
+returned a ggplot object.</p>
+<pre class="r"><code># Write your code here</code></pre>
+<p>After reviewing your results, you want to exclude any points that are
+in the ocean, but ignore all of the other flags. Use purrr to filter out
+any points that are flagged as “seas” in the <code>clean_list</code>
+object.</p>
+<pre class="r"><code># Write your code here</code></pre>
+</div>
+<div id="a-word-of-caution" class="section level1">
+<h1>A word of caution</h1>
+<p>We have mentioned how one of the benefits of functional programming
+is that you can avoid side effects; side effects are effects that you
+don’t intend to happen when you run your code. For example, if you have
+a for loop that changes a variable you didn’t mean too, that is a side
+effect. Using a functional approach can help you avoid side effects by
+explicitly defining the input and output of your functions.</p>
+<p>However, the environment inside a function is not completely
+independent from that outside the function. While you can’t modify a
+variable outside of a function from inside a function, you can still
+access variables from outside the function inside a function. This means
+that if you forget to pass an argument to a function, R will look for
+that variable outside your function and use it. This can lead to
+unexpected results and bugs that are hard to track down.</p>
+<p>For example:</p>
+<pre class="r"><code># a is defined outside the function
+a &lt;- 1
+
+# foo is a function that takes an argument b and overwrites a with the sum of a and b
+uhoh &lt;- function(b) {
+   a &lt;- a + b
+   return(a)
+}
+
+# Even though a is not passed as an argument to the function, R will look for it outside the function and use it, which is why the function will work and return 3
+uhoh(b = 2)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code># note that a will still not be modified outside the function even though we used it and overwrote it inside the function
+a</code></pre>
+<pre><code>## [1] 1</code></pre>
+<p>Below is a more complex example of how this can lead to unexpected
+results. Can you figure out what is happening?</p>
+<pre class="r"><code># Let&#39;s say you wanted to create a function to create a bunch of different color palettes, all starting with black and ending with a specified color:
+create_palettes &lt;- function(color) {
+  colorRampPalette(c(&quot;black&quot;, color))(10)
+}
+color &lt;- c(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)
+palettes &lt;- map(color, create_palettes)
+par(mfrow = c(1,3))
+plot(1:10, col = palettes[[1]], pch = 19, cex = 2, main = &quot;Red Palette&quot;)
+plot(1:10, col = palettes[[2]], pch = 19, cex = 2, main = &quot;Green Palette&quot;)
+plot(1:10, col = palettes[[3]], pch = 19, cex = 2, main = &quot;Blue Palette&quot;)</code></pre>
+<p><img src="vignette-content_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code># Now, let&#39;s say you wanted to create a Mad Libs story generator using a function:
+create_madlib &lt;- function(adjective1, adjective2, noun, verb, food) {
+  writeLines(paste0(
+    &quot;In the heart of a &quot;, adjective1, &quot; rainforest, scientists discovered a new species named the &quot;,
+    adjective2, &quot; &quot;, noun, &quot; Lizard. This lizard has &quot;, color, &quot; skin, a tail that can &quot;, verb,
+    &quot; and a diet of &quot;, food, &quot;. What an incredible day for science!&quot;
+  ))
+}
+
+# Replace the placeholders with your own words
+create_madlib(adjective1 = &quot;stinky&quot;, adjective2 = &quot;rainbow&quot;, noun = &quot;egg&quot;, verb = &quot;tango&quot;, food = &quot;marshmallows&quot;)</code></pre>
+<pre><code>## In the heart of a stinky rainforest, scientists discovered a new species named the rainbow egg Lizard. This lizard has red skin, a tail that can tango and a diet of marshmallows. What an incredible day for science!
+## In the heart of a stinky rainforest, scientists discovered a new species named the rainbow egg Lizard. This lizard has green skin, a tail that can tango and a diet of marshmallows. What an incredible day for science!
+## In the heart of a stinky rainforest, scientists discovered a new species named the rainbow egg Lizard. This lizard has blue skin, a tail that can tango and a diet of marshmallows. What an incredible day for science!</code></pre>
+<p>Why are you ending up with the madlibs story repeated three
+times?</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
