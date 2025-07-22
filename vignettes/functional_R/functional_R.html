@@ -1574,13 +1574,13 @@ names(roll_results) &lt;- names(die)
 
 roll_results</code></pre>
 <pre><code>## $d6
-##  [1] 2 1 1 5 3 3 4 3 2 5
+##  [1] 4 5 3 2 6 4 3 1 2 1
 ## 
 ## $d10
-##  [1] 10  3  1  5  3  4  8  1  2  4
+##  [1] 8 4 6 6 7 2 1 4 5 1
 ## 
 ## $magic8ball
-##  [1]  8 19 15 12 10  1 14  4 13 14</code></pre>
+##  [1]  8  8 15 15 11  5  7 14  9 13</code></pre>
 <p>Or you could define a function to roll a die given some number of
 sides and then use map to run that function 10 times:</p>
 <pre class="r"><code>die &lt;- c(d6 = 6, d10 = 10, magic8ball = 20)
@@ -1591,13 +1591,13 @@ roll_results &lt;- map(die, roll)
 
 roll_results</code></pre>
 <pre><code>## $d6
-##  [1] 6 5 1 5 1 3 4 3 4 1
+##  [1] 2 5 4 5 4 6 1 6 2 1
 ## 
 ## $d10
-##  [1]  6  4  1  3  3  6  3  6  1 10
+##  [1]  4  1  9  1  5  9  8  4 10  8
 ## 
 ## $magic8ball
-##  [1]  9  9 12 20 11  5 18 13 14 19</code></pre>
+##  [1] 11  2 17 10 19  5 13 20 11  5</code></pre>
 <p>Some benefits of this approach are: 1. It is easier to read and
 understand. You define a function whose name tells you what it is doing
 (<code>roll()</code>) and then apply that function to your list of die.
@@ -1613,16 +1613,16 @@ names to the output (which can be risky in other contexts).</p>
 <code>sapply()</code> or <code>lapply()</code> to do the same thing:</p>
 <pre class="r"><code>sapply(1:10, function(x) roll(sides = 6))</code></pre>
 <pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
-##  [1,]    4    4    5    2    2    5    4    3    3     3
-##  [2,]    4    2    1    3    2    4    2    3    6     5
-##  [3,]    6    4    6    1    4    2    4    5    4     5
-##  [4,]    2    1    3    3    1    3    5    6    2     2
-##  [5,]    2    6    5    5    6    6    1    6    1     5
-##  [6,]    4    6    4    5    1    6    4    4    6     2
-##  [7,]    1    2    2    1    2    6    5    2    3     5
-##  [8,]    6    4    2    4    3    1    2    5    2     3
-##  [9,]    5    4    1    4    1    1    6    2    5     4
-## [10,]    3    3    2    3    2    5    6    4    4     1</code></pre>
+##  [1,]    2    6    1    1    6    4    5    6    1     4
+##  [2,]    6    1    2    3    4    1    5    3    6     1
+##  [3,]    5    4    1    4    5    5    2    5    5     5
+##  [4,]    1    6    2    1    2    2    6    2    5     1
+##  [5,]    6    2    5    3    1    1    4    5    5     5
+##  [6,]    2    6    3    1    6    3    2    3    1     2
+##  [7,]    5    6    6    1    1    3    5    4    3     4
+##  [8,]    5    4    4    1    2    5    5    4    3     4
+##  [9,]    2    4    4    6    1    2    5    1    5     1
+## [10,]    3    4    5    2    6    4    1    1    1     1</code></pre>
 <p><strong>Example 1: Using <code>map()</code> to pull occurrence data
 for a list of species</strong></p>
 <p>Now let’s try applying <code>map()</code> to a more realistic

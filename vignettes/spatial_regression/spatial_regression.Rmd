@@ -6,7 +6,6 @@ output:
     toc: true
     toc_depth: 2
     toc_float: true 
-output_file: index.html
 editor_options: 
   markdown: 
     wrap: 72
