@@ -2,10 +2,9 @@
 title: "Functional programming in R"
 author: "Anusha Bishop"
 output: 
-  html_document:
+  html_fragment:
     toc: true
     toc_depth: 2
-    toc_float: true 
 editor_options: 
   markdown: 
     wrap: 72

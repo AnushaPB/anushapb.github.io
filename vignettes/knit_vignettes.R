@@ -1,4 +1,3 @@
-
 # Script to knit RMarkdown files and create Jekyll-ready pages
 library(rmarkdown)
 library(here)
@@ -20,11 +19,9 @@ for (rmd in vignettes) {
   # Knit to HTML fragment (no <html>, <head>, etc.)
   render(
     input = rmd,
-    output_format = html_document(
+    output_format = html_fragment(
       toc = TRUE,
-      toc_depth = 2,
-      toc_float = TRUE,
-      self_contained = FALSE
+      toc_depth = 2
     ),
     output_file = file.path(out_dir, "vignette-content.html"),
     quiet = TRUE
@@ -40,10 +37,11 @@ title: \"{gsub('_', ' ', vignette_name)}\"
 permalink: /vignettes/{vignette_name}/
 ---
 
-{{% include_relative vignette-content.html %}}
+{{'{'}}% include_relative vignette-content.html %{{'}'}}
 "
     ),
 file = index_md
   )
   message("Created wrapper: ", index_md)
 }
+

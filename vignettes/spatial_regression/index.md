@@ -4,4 +4,4 @@ title: "spatial regression"
 permalink: /vignettes/spatial_regression/
 ---
 
-{% include_relative vignette-content.html %}
+{'}}% include_relative vignette-content.html %{{'}
