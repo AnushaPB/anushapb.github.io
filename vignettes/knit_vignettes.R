@@ -20,7 +20,6 @@ for (rmd in vignettes) {
       toc = TRUE,
       toc_depth = 2,
       toc_float = TRUE,
-      theme = "cosmo",
       self_contained = TRUE
     ),
     output_file = file.path(out_dir, "index.html"),
