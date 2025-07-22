@@ -1531,17 +1531,6 @@ lyr &lt;- aggregate(lotr_lyr, 3)
 
 # Run moving window to estimate genetic diversity based on heterozygosity
 wgd &lt;- window_gd(lotr_vcf, lotr_coords, lyr, stat = &quot;Ho&quot;, wdim = 5)</code></pre>
-<pre><code>## Loading required package: vcfR</code></pre>
-<pre><code>## Warning: package &#39;vcfR&#39; was built under R version 4.3.2</code></pre>
-<pre><code>## Registered S3 method overwritten by &#39;ape&#39;:
-##   method   from 
-##   plot.mst spdep</code></pre>
-<pre><code>## 
-##    *****       ***   vcfR   ***       *****
-##    This is vcfR 1.15.0 
-##      browseVignettes(&#39;vcfR&#39;) # Documentation
-##      citation(&#39;vcfR&#39;) # Citation
-##    *****       *****      *****       *****</code></pre>
 <pre><code>## Warning in crs_check_window(lyr, coords): No CRS found for the provided coordinates. Make sure the coordinates and the raster have the same projection (see function details or wingen vignette)</code></pre>
 <pre><code>## Warning in crs_check_window(lyr, coords): No CRS found for the provided raster. Make sure the coordinates and the raster have the same projection (see function details or wingen vignette)</code></pre>
 <pre class="r"><code># Krige results (here I am kriging to the same resolution as the input)
