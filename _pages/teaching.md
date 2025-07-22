@@ -27,7 +27,7 @@ This workshop provides an introduction to coding with GitHub Copilot, an AI-powe
 This is a collection of open-source vignettes (mini-tutorials) that I’ve created on various topics. They are designed as practical, step-by-step guides, but are more informal and less broadly applicable than my full workshop materials.
 
 - [**Spatial Regression in R**](/vignettes/spatial_regression/)   
-  A walkthrough of implementing different spatial regression models in R to model genetic diversity.
+  A walkthrough implementing different spatial regression models in R to model genetic diversity.
 
 - [**Functional programming in R**](vignettes/functional_R/)  
   An introduction to using functional programming techniques (e.g., `purrr`, `map` functions) to write cleaner, more efficient R code.
