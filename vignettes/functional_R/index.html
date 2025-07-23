@@ -1598,23 +1598,18 @@ roll_results</code></pre>
 ## 
 ## $magic8ball
 ##  [1] 18 14 18  7  1 13 13  6  7 20</code></pre>
-<p>Some benefits of this approach are:</p>
-<ol style="list-style-type: decimal">
-<li><p>It is easier to read and understand. You define a function whose
-name tells you what it is doing (<code>roll()</code>) and then apply
-that function to your list of die.</p></li>
-<li><p>If there happened to be a bug in the <code>roll()</code>
+<p>Some benefits of this approach are: <br> 1. It is easier to read and
+understand. You define a function whose name tells you what it is doing
+(<code>roll()</code>) and then apply that function to your list of die.
+<br> 2. If there happened to be a bug in the <code>roll()</code>
 function, we could fix it in one place and it would be fixed for all the
-rolls.</p></li>
-<li><p>You can easily modify the function by adding additional
-arguments, such as the number of times to roll the die.</p></li>
-<li><p>We won’t have any side effects from the for loop, such as
-accidentally overwriting a variable.</p></li>
-<li><p>The output preserves the names of the input vector, so we easily
-know which die each set of rolls corresponds to without having to assign
-names to the output (which can be risky in other contexts).</p></li>
-</ol>
-<p>If you don’t like the tidyverse, you can also use
+rolls. <br> 3. You can easily modify the function by adding additional
+arguments, such as the number of times to roll the die. <br> 4. We won’t
+have any side effects from the for loop, such as accidentally
+overwriting a variable. <br> 5. The output preserves the names of the
+input vector, so we easily know which die each set of rolls corresponds
+to without having to assign names to the output (which can be risky in
+other contexts). <br> If you don’t like the tidyverse, you can also use
 <code>sapply()</code> or <code>lapply()</code> to do the same thing:</p>
 <pre class="r"><code>sapply(1:10, function(x) roll(sides = 6))</code></pre>
 <pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
@@ -1978,35 +1973,30 @@ clean_project1 &lt;- clean_coordinates(occ_data[[&quot;Project01&quot;]], tests 
 <pre><code>## Flagged 280 of 1000 records, EQ = 0.28.</code></pre>
 <pre class="r"><code>clean_list &lt;- list(Project01 = clean_project1, Project02 = clean_project2, Project03 = clean_project3)</code></pre>
 <p>The tests argument specifies which tests to run. The tests specified
-here are:</p>
-<ul>
-<li><p><strong>institutions</strong> tests a radius around known
-biodiversity institutions from institutions. The radius is
-inst_rad.</p></li>
-<li><p><strong>outliers</strong> tests each species for outlier records.
-Depending on the outliers_mtp and outliers.td arguments either flags
-records that are a minimum distance away from all other records of this
-species (outliers_td) or records that are outside a multiple of the
-interquartile range of minimum distances to the next neighbour of this
-species (outliers_mtp). Three different methods are available for the
-outlier test: “If “outlier” a boxplot method is used and records are
-flagged as outliers if their mean distance to all other records of the
-same species is larger than mltpl * the interquartile range of the mean
-distance of all records of this species. If “mad” the median absolute
-deviation is used. In this case a record is flagged as outlier, if the
-mean distance to all other records of the same species is larger than
-the median of the mean distance of all points plus/minus the mad of the
-mean distances of all records of the species * mltpl. If “distance”
-records are flagged as outliers, if the minimum distance to the next
-record of the species is &gt; tdi.</p></li>
-<li><p><strong>seas</strong> tests if coordinates fall into the
-ocean.</p></li>
-<li><p><strong>validity</strong> checks if coordinates correspond to a
-lat/lon coordinate reference system. This test is always on, since all
-records need to pass for any other test to run.</p></li>
-</ul>
-<p><strong>For a list of all available tests see the function
-documentation with ?clean_coordinates.</strong></p>
+here are: <br> - <strong>institutions</strong> tests a radius around
+known biodiversity institutions from institutions. The radius is
+inst_rad. <br> - <strong>outliers</strong> tests each species for
+outlier records. Depending on the outliers_mtp and outliers.td arguments
+either flags records that are a minimum distance away from all other
+records of this species (outliers_td) or records that are outside a
+multiple of the interquartile range of minimum distances to the next
+neighbour of this species (outliers_mtp). Three different methods are
+available for the outlier test: “If “outlier” a boxplot method is used
+and records are flagged as outliers if their mean distance to all other
+records of the same species is larger than mltpl * the interquartile
+range of the mean distance of all records of this species. If “mad” the
+median absolute deviation is used. In this case a record is flagged as
+outlier, if the mean distance to all other records of the same species
+is larger than the median of the mean distance of all points plus/minus
+the mad of the mean distances of all records of the species * mltpl. If
+“distance” records are flagged as outliers, if the minimum distance to
+the next record of the species is &gt; tdi. <br> - <strong>seas</strong>
+tests if coordinates fall into the ocean. <br> -
+<strong>validity</strong> checks if coordinates correspond to a lat/lon
+coordinate reference system. This test is always on, since all records
+need to pass for any other test to run. <br> <strong>For a list of all
+available tests see the function documentation with
+?clean_coordinates.</strong></p>
 <pre class="r"><code># Write your code here</code></pre>
 <p>Below is code to plot the results of the tests for project 1. The
 .summary column contains the overall result of the tests. The other

@@ -74,17 +74,17 @@ roll_results
 ```
 
 Some benefits of this approach are: 
-
+<br>
 1. It is easier to read and understand. You define a function whose name tells you what it is doing (`roll()`) and then apply that function to your list of die.
-
+<br>
 2.  If there happened to be a bug in the `roll()` function, we could fix it in one place and it would be fixed for all the rolls.
-
+<br>
 3.  You can easily modify the function by adding additional arguments, such as the number of times to roll the die.
-
+<br>
 4.  We won't have any side effects from the for loop, such as accidentally overwriting a variable.
-
+<br>
 5.  The output preserves the names of the input vector, so we easily know which die each set of rolls corresponds to without having to assign names to the output (which can be risky in other contexts).
-
+<br>
 If you don't like the tidyverse, you can also use `sapply()` or `lapply()` to do the same thing:
 ```{r}
 sapply(1:10, function(x) roll(sides = 6))
@@ -265,15 +265,15 @@ clean_list <- list(Project01 = clean_project1, Project02 = clean_project2, Proje
 ```
 
 The tests argument specifies which tests to run. The tests specified here are:
-
+<br>
 - **institutions** tests a radius around known biodiversity institutions from institutions. The radius is inst_rad.
-
+<br>
 - **outliers** tests each species for outlier records. Depending on the outliers_mtp and outliers.td arguments either flags records that are a minimum distance away from all other records of this species (outliers_td) or records that are outside a multiple of the interquartile range of minimum distances to the next neighbour of this species (outliers_mtp). Three different methods are available for the outlier test: "If “outlier” a boxplot method is used and records are flagged as outliers if their mean distance to all other records of the same species is larger than mltpl * the interquartile range of the mean distance of all records of this species. If “mad” the median absolute deviation is used. In this case a record is flagged as outlier, if the mean distance to all other records of the same species is larger than the median of the mean distance of all points plus/minus the mad of the mean distances of all records of the species * mltpl. If “distance” records are flagged as outliers, if the minimum distance to the next record of the species is > tdi.
-
+<br>
 - **seas** tests if coordinates fall into the ocean.
-
+<br>
 - **validity** checks if coordinates correspond to a lat/lon coordinate reference system. This test is always on, since all records need to pass for any other test to run.
-
+<br>
 **For a list of all available tests see the function documentation with ?clean_coordinates.**
 
 ```{r}
