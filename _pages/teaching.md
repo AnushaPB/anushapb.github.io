@@ -31,8 +31,9 @@ This is a collection of other open resources for research and teaching that I’
 
 - [**Functional Programming in R**](/vignettes/functional_R/)  
   An introduction to using functional programming techniques (e.g., `purrr`, `map` functions) to write cleaner, more efficient R code.
+  
 
-- [**Guide to UC Berkeley Data Storage**](https://anushapb.github.io/ucb_data_storage/)
+- [**Guide to UC Berkeley Data Storage**](https://anushapb.github.io/ucb_data_storage/) 
   An unofficial guide to UC Berkeley Data Storage options
   
   
