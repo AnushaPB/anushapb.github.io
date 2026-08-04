@@ -9,7 +9,7 @@
 locale                   : "en-US"
 title                    : "Anusha Bishop"
 title_separator          : "-"
-name                     : &name "Anusha Bishop"
+name                     : &name "Anusha Bishop, Ph.D."
 description              : &description "EEB"
 url                      : https://anushapb.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "/" # the subpath of your site, e.g. "/blog"
@@ -80,7 +80,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Anusha Bishop"
+  name             : "Anusha Bishop, Ph.D."
   avatar           : "profile.png"
   bio              : "(she/her/hers)"
   location         : 
