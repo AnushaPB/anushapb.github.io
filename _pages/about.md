@@ -8,13 +8,4 @@ redirect_from:
   - /about.html
 ---
 
-I am a PhD student at UC Berkeley conducting research on how evolution plays out across landscapes with the goal of understanding species vulnerability to environmental change. My work involves building and applying tools for studying genetic diversity, connectivity, and adaptation. 
-
-I am part of the [Wang Lab](https://ourenvironment.berkeley.edu/wang-lab) in the [Department of Environmental Science, Policy, and Management](https://ourenvironment.berkeley.edu/), an affiliate of the [Museum of Vertebrate Zoology](https://mvz.berkeley.edu/), and on the Landscape Genomics Team for the [California Conservation Genomics Project](https://www.ccgproject.org/).
-
-<p align="center">
-  <img src="/images/lablogo.png" width="15%" />
-  <img src="/images/espm.png" width="15%" />
-  <img src="/images/mvz.jpeg" width="15%" />
-  <img src="/images/ccgp.png" width="15%" />
-</p>
+I am a [Simons Foundation International](https://www.simonsfoundation.org/) Postdoctoral Fellow of the [Life Sciences Research Foundation (LSRF)](https://lsrf.org/) in the [Bay Lab](https://baylab.github.io/) at UC Davis. I study how ecological processes shape genetic diversity and gene flow in order to predict responses to environmental change. My current work focuses on mapping and modelling marine gene flow to predict the future of connectivity and genetic diversity in our changing oceans. I am also part of the Landscape Genomics Team for the [California Conservation Genomics Project](https://www.ccgproject.org/), where I develop and apply landscape genomic approaches to map, understand, and conserve genetic diversity across California.
