@@ -56,8 +56,6 @@ alexa_site_verification  :
 yandex_site_verification :
 
 # Social Sharing
-bluesky:
-  username               : &bluesky "anushabishop"
 facebook:
   username               :
   app_id                 :
@@ -85,6 +83,7 @@ author:
   bio              : "(she/her/hers)"
   location         : 
   employer         :
+  bluesky          : "anushabishop.bsky.social"
   googlescholar    : "https://scholar.google.com/citations?hl=en&user=VSfYHyQAAAAJ"
   email            :
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
