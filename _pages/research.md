@@ -4,6 +4,12 @@ title: "Research"
 author_profile: true
 ---
 
+<img src="/images/sea_anenome.png" align="right" width="10%"/>
+
+## Gene flow in a changing ocean
+
+Gene flow plays a critical role in maintaining genetic diversity and shaping species' responses to environmental change, yet the processes governing connectivity in marine systems remain poorly understood. I am working on mapping patterns of gene flow across marine species and investigate the drivers of connectivity by integrating ecological, oceanographic, and genomic data. Ultimately, this work aims to better predict how shifting ocean currents and changing temperatures will shape future patterns of gene flow and genetic diversity.
+
 <img src="/images/wingen.png" align="right" width="10%"/>
 
 ## Developing tools for next generation landscape genomics
